@@ -21,6 +21,7 @@ executable typesafe-websockets
                      , wai
                      , wai-websockets
                      , warp
+                     , warp-tls
                      , websockets
                      , http-types
                      , safe
