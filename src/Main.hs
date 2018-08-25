@@ -12,14 +12,16 @@ import qualified Data.Text                      as Text
 import qualified Network.HTTP.Types             as Http
 import qualified Network.Wai                    as Wai
 import qualified Network.Wai.Handler.Warp       as Warp
+import qualified Network.Wai.Handler.WarpTLS    as WarpTLS
 import qualified Network.Wai.Handler.WebSockets as WS
 import qualified Network.WebSockets             as WS
 import qualified Safe
 
 main :: IO ()
 main = do
+  let tlsSettings = WarpTLS.tlsSettings "./localhost.crt" "./localhost.key"
   state <- Concurrent.newMVar []
-  Warp.run 3000 $ WS.websocketsOr
+  WarpTLS.runTLS tlsSettings Warp.defaultSettings $ WS.websocketsOr
     WS.defaultConnectionOptions
     (wsApp state)
     httpApp
