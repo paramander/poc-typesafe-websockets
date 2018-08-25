@@ -33,7 +33,7 @@ view model =
     ]
 
 wsUrl : String
-wsUrl = "ws://localhost:3000"
+wsUrl = "wss://localhost:3000"
 
 update : Msg -> Model -> (Model, Cmd Msg)
 update msg model =
